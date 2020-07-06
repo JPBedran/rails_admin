@@ -25,7 +25,7 @@ module RailsAdmin
     end
 
     def dashboard
-      redirect_to index_path
+      redirect_to back_or_index
     end
 
     def bulk_action
