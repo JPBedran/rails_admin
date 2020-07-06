@@ -25,6 +25,7 @@ module RailsAdmin
     end
 
     def dashboard
+      binding.pry
       redirect_to back_or_index
     end
 
