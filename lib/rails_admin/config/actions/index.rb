@@ -9,10 +9,10 @@ module RailsAdmin
         register_instance_option :collection do
           true
         end
-
-        register_instance_option :root? do
-          true
-        end
+ 
+        # register_instance_option :root? do
+        #   true
+        # end
 
         register_instance_option :http_methods do
           [:get, :post]
