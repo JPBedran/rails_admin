@@ -25,8 +25,7 @@ module RailsAdmin
     end
 
     def dashboard
-      binding.pry
-      redirect_to back_or_index
+      redirect_to index_path(:students)
     end
 
     def bulk_action
