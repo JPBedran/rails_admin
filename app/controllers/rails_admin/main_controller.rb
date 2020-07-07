@@ -24,9 +24,9 @@ module RailsAdmin
       EOS
     end
 
-    def dashboard
-      redirect_to index_path(:students)
-    end
+    # def dashboard
+    #   redirect_to index_path(:students)
+    # end
 
     def bulk_action
       send(params[:bulk_action]) if params[:bulk_action].in?(RailsAdmin::Config::Actions.all(controller: self, abstract_model: @abstract_model).select(&:bulkable?).collect(&:route_fragment))
