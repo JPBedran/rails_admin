@@ -34,8 +34,8 @@ module RailsAdmin
                 @most_recent_created[t.model.name] = t.model.last.try(:created_at)
               end
             else 
-              red = redirect_to index_path(:student) 
-              red
+              # red = redirect_to index_path(:student) 
+              # red
             end
             render @action.template_name, status: @status_code || :ok
           end
