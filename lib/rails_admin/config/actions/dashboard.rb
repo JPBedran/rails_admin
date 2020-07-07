@@ -5,7 +5,7 @@ module RailsAdmin
         RailsAdmin::Config::Actions.register(self)
 
         register_instance_option :root? do
-          false
+          true
         end
 
         register_instance_option :breadcrumb_parent do
@@ -33,6 +33,8 @@ module RailsAdmin
                 next unless t.properties.detect { |c| c.name == :created_at }
                 @most_recent_created[t.model.name] = t.model.last.try(:created_at)
               end
+            else 
+              redirect_to index_path(:model_name)
             end
             render @action.template_name, status: @status_code || :ok
           end
