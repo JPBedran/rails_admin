@@ -22,10 +22,12 @@
   %table
     %tr
       %th{align: "center"} User
+      %th{align "center"} E-mail
       %th{align: "center"} Status
     - @users.each do |user|
       %tr
         %td= user.name
+        %td= user.corporative_email
         %td= user.status
   %br/
   %br/
