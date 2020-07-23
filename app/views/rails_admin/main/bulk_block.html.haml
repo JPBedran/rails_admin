@@ -1,44 +1,34 @@
-<style type="text/css">
-      th, td{
-        padding: 5px;
-      }
-    </style>
-
-    <form action="" method="POST">
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
-      <input type="hidden" name="bulk_action" value="<%= request.params['bulk_action'] %>" />
-      <input type="hidden" name="bulk_step" value="update" />
-      <% request.params['bulk_ids'].each do |bulk_id| %>
-        <input type="hidden" name="bulk_ids[]" value="<%= bulk_id %>" />
-      <% end %>
-
-      <label for="new_category_id">Please choose the category where you would like to move these users:</label><br />
-      <select name="new_category_id" id="new_category_id">
-        <% Category.all.order(:name).each do |category| %>
-          <option value="<%= category.id %>">
-            <%= category.name %>
-          </option>
-        <% end %>
-      </select>
-      <br /><br />
-      <input type="submit" value="Update category" />
-
-      <h3>Users to be updated:</h3>
-      <table>
-        <tr>
-          <th align="center">User</th>
-          <th align="center">Current Category</th>
-          <th align="center">Date</th>
-        </tr>
-        <% @users.each do |user| %>
-          <tr>
-              <td><%= user.name %></td>
-              <td><%= user.category.name %></td>
-              <td><%= user.created_at.to_s %></td>
-          </tr>
-        <% end %>
-      </table>
-      <br /><br />
-      <% if @users.count >= 10 %>
-        <input type="submit" value="Update category" />
-      <% end %>
+:css
+  th, td{
+    padding: 5px;
+  }
+%form{action: "", method: "POST"}
+  %input{name: "authenticity_token", type: "hidden", value: form_authenticity_token}/
+  %input{name: "bulk_action", type: "hidden", value: "#{request.params['bulk_action']}"}/
+  %input{name: "bulk_step", type: "hidden", value: "update"}/
+  - request.params['bulk_ids'].each do |bulk_id|
+    %input{name: "bulk_ids[]", type: "hidden", value: bulk_id}/
+  %label{for: "new_category_id"} Please choose the category where you would like to move these users:
+  %br/
+  %select#new_category_id{name: "new_category_id"}
+    - Category.all.order(:name).each do |category|
+      %option{value: "#{category.id}"}
+        = category.name
+  %br/
+  %br/
+  %input{type: "submit", value: "Update category"}/
+  %h3 Users to be updated:
+  %table
+    %tr
+      %th{align: "center"} User
+      %th{align: "center"} Current Category
+      %th{align: "center"} Date
+    - @users.each do |user|
+      %tr
+        %td= user.name
+        %td= user.category.name
+        %td= user.created_at.to_s
+  %br/
+  %br/
+  - if @users.count >= 10
+    %input{type: "submit", value: "Update category"}/
