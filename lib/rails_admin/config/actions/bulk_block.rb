@@ -1,7 +1,7 @@
 module RailsAdmin
   module Config
     module Actions
-      class BulkUpdateCategory < RailsAdmin::Config::Actions::Base
+      class BulkBlock < RailsAdmin::Config::Actions::Base
         RailsAdmin::Config::Actions.register(self)
 
         register_instance_option :collection do
