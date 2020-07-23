@@ -8,27 +8,26 @@
   %input{name: "bulk_step", type: "hidden", value: "update"}/
   - request.params['bulk_ids'].each do |bulk_id|
     %input{name: "bulk_ids[]", type: "hidden", value: bulk_id}/
-  %label{for: "new_category_id"} Please choose the category where you would like to move these users:
+  %label{for: "update_users_status"} Alter Status:
   %br/
-  %select#new_category_id{name: "new_category_id"}
-    - CompanyProfile.all.order(:name).each do |category|
-      %option{value: "#{category.id}"}
-        = category.name
+  %select#new_category_id{name: "update_users_status"}
+    %option{value: 1}
+      = "Unblocked"
+    %option{value: 0}
+      = "Blocked"
   %br/
   %br/
-  %input{type: "submit", value: "Update category"}/
+  %input{type: "submit", value: "Update status"}/
   %h3 Users to be updated:
   %table
     %tr
       %th{align: "center"} User
-      %th{align: "center"} Current Category
-      %th{align: "center"} Date
+      %th{align: "center"} Status
     - @users.each do |user|
       %tr
         %td= user.name
-        %td= user.category.name
-        %td= user.created_at.to_s
+        %td= user.status
   %br/
   %br/
   - if @users.count >= 10
-    %input{type: "submit", value: "Update category"}/
+    %input{type: "submit", value: "Update status"}/

@@ -22,12 +22,12 @@ module RailsAdmin
               else
                 render @action.template_name
               end
-            elsif request.params['new_category_id'].present?
-              @new_category = Category.find(request.params['new_category_id'])
-              @users.update_all(category_id: @new_category.id)
-              redirect_to index_path, flash: {info: "Category updated to #{@new_category.name} for #{@users.count} users"}
+            elsif request.params['update_users_status'].present?
+            #   @new_category = Category.find(request.params['new_category_id'])
+              @users.update_all(status: request.params['update_users_status'])
+              redirect_to index_path, flash: {info: "Users status updated for #{@users.count} users"}
             else
-                flash[:error] = 'No category selected'
+                flash[:error] = 'No status selected'
                 render @action.template_name
             end
           end
