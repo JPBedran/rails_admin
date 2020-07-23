@@ -11,7 +11,7 @@
   %label{for: "new_category_id"} Please choose the category where you would like to move these users:
   %br/
   %select#new_category_id{name: "new_category_id"}
-    - Category.all.order(:name).each do |category|
+    - CompanyProfile.all.order(:name).each do |category|
       %option{value: "#{category.id}"}
         = category.name
   %br/
